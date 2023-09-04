@@ -1,10 +1,2 @@
 #!/bin/bash
-
-# Check if the log file exists
-if [ ! -f webserver.log ]; then
-	    echo "Log file 'webserver.log' not found."
-	        exit 1
-fi
-
-# Read the log file and extract hosts/IPs
-awk '{print $1}' webserver.log | sort | uniq -c | sort -rn | head -n 11
+tail -n +2 | cut -f -1 | sort -k 1 | uniq -c | sort -rnk 1 | head -n 11 | rev | cut -d '' -f -1 | rev
